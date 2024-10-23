@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8B46D5FD-C4BC-45D2-B31D-C18AC10BF486}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsaacHili.InstagramTools.Followers", "src\IsaacHili.InstagramTools.Followers\IsaacHili.InstagramTools.Followers.csproj", "{72467640-41EA-4B1E-A93E-99C90586F78B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsaacHili.InstagramTools.Followers.Abstractions", "src\IsaacHili.InstagramTools.Followers.Abstractions\IsaacHili.InstagramTools.Followers.Abstractions.csproj", "{941D93C5-2454-4DEE-9957-8BD24F3C355E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsaacHili.InstagramTools.App", "src\IsaacHili.InstagramTools.App\IsaacHili.InstagramTools.App.csproj", "{2A7D74D4-2876-45DB-8FA8-403E46A57E81}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72467640-41EA-4B1E-A93E-99C90586F78B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72467640-41EA-4B1E-A93E-99C90586F78B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72467640-41EA-4B1E-A93E-99C90586F78B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72467640-41EA-4B1E-A93E-99C90586F78B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{941D93C5-2454-4DEE-9957-8BD24F3C355E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{941D93C5-2454-4DEE-9957-8BD24F3C355E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{941D93C5-2454-4DEE-9957-8BD24F3C355E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{941D93C5-2454-4DEE-9957-8BD24F3C355E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A7D74D4-2876-45DB-8FA8-403E46A57E81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A7D74D4-2876-45DB-8FA8-403E46A57E81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A7D74D4-2876-45DB-8FA8-403E46A57E81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A7D74D4-2876-45DB-8FA8-403E46A57E81}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{72467640-41EA-4B1E-A93E-99C90586F78B} = {8B46D5FD-C4BC-45D2-B31D-C18AC10BF486}
+		{941D93C5-2454-4DEE-9957-8BD24F3C355E} = {8B46D5FD-C4BC-45D2-B31D-C18AC10BF486}
+		{2A7D74D4-2876-45DB-8FA8-403E46A57E81} = {8B46D5FD-C4BC-45D2-B31D-C18AC10BF486}
+	EndGlobalSection
+EndGlobal
