@@ -8,7 +8,8 @@
 
 	<h2>Followers and Following</h2>
 
-	<InputFile OnChange="LoadFileAsync" />
+	@* File Input *@
+	<InputFile OnChange="LoadFileAsync" accept=".zip" />
 
 	<h3>Accounts That Don't Follow You Back</h3>
 
@@ -63,6 +64,13 @@
 @code {
 	private async Task LoadFileAsync(InputFileChangeEventArgs e)
 	{
+		string extension = Path.GetExtension(e.File.Name);
+
+		if (extension != ".zip")
+		{
+			return;
+		}
+
 		// Copy archive to memory stream
 		using var stream = new MemoryStream();
 		await e.File.OpenReadStream().CopyToAsync(stream);
