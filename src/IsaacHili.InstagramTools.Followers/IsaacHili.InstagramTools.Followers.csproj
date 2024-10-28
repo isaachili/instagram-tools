@@ -6,4 +6,14 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
+	<!-- Project References -->
+	<ItemGroup>
+		<ProjectReference Include="..\IsaacHili.InstagramTools.Followers.Abstractions\IsaacHili.InstagramTools.Followers.Abstractions.csproj" />
+	</ItemGroup>
+
+	<!-- Package References -->
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.*" />
+	</ItemGroup>
+
 </Project>
