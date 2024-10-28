@@ -172,6 +172,7 @@ internal class ConnectionsService : IConnectionsService
 	{
 		// Group and sort connections
 		var buckets = connections.Values.GroupBy(g => g.ConnectionType)
+			.Where(g => g.Key != ConnectionTypes.None)
 			.OrderBy(g => g.Key)
 			.Select(g => g
 				.OrderBy(c => (IComparable)(c.ConnectionType switch
