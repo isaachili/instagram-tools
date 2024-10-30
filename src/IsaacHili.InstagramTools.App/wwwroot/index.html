@@ -25,10 +25,26 @@
 </head>
 
 <!-- Body -->
-<body>
+<body class="h-full flex flex-col bg-mustard text-midnight font-sans select-text">
 
-	<h1>Instagram Tools</h1>
-	<div id="app">Loading...</div>
+	<!-- Header -->
+	<header class="flex items-center justify-center p-12 font-mono text-xl select-none
+		md:justify-start">
+
+		<!-- Icon -->
+		<img class="h-16 w-16 mr-8" src="assets/icons/instagram.svg" alt="" role="presentation" />
+
+		<!-- Heading -->
+		<h1>Instagram Tools</h1>
+
+	</header>
+
+	<!-- Main -->
+	<main id="app" class="px-10 py-4 md:px-20 lg:px-[30vw] leading-relaxed
+		selection:bg-midnight selection:text-slate-50">
+		Loading...
+	</main>
+
 	<script src="_framework/blazor.webassembly.js"></script>
 
 </body>
