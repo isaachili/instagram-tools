@@ -6,62 +6,68 @@
 @* Followers and Following *@
 <section>
 
-	<h2>Followers and Following</h2>
+	<h2>My Connections</h2>
 
 	@* File Input *@
 	<InputFile OnChange="LoadFileAsync" accept=".zip" />
 
-	<h3>Accounts That Don't Follow You Back</h3>
+	@if (IsFileLoaded)
+	{
+		<h3>Accounts That Don't Follow You Back</h3>
 
-	@* Not Followed *@
-	<ul>
-		@foreach (var follower in connectionsService.NotFollowed)
-		{
-			<li>
-				<a href="@follower.ProfileUri" target="_blank">@follower.Username</a>
-			</li>
-		}
-	</ul>
-
-	@* Accounts That You Don't Follow Back *@
-	<details>
-
-		@* Title *@
-		<summary>Accounts That You Don't Follow Back</summary>
-
-		@* Not Following *@
+		@* Not Followed *@
 		<ul>
-			@foreach (var follower in connectionsService.NotFollowing)
+			@foreach (var follower in connectionsService.NotFollowed)
 			{
 				<li>
-					<a href="@follower.ProfileUri" target="_blank">@follower.Username</a>
+					<a href="@follower.ProfileUri" target="_blank">@@@follower.Username</a>
 				</li>
 			}
 		</ul>
 
-	</details>
+		@* Accounts That You Don't Follow Back *@
+		<details>
 
-	@* Accounts That Follow You Back *@
-	<details>
+			@* Title *@
+			<summary>Accounts That You Don't Follow Back</summary>
 
-		@* Title *@
-		<summary>Accounts That Follow You Back</summary>
+			@* Not Following *@
+			<ul>
+				@foreach (var follower in connectionsService.NotFollowing)
+				{
+					<li>
+						<a href="@follower.ProfileUri" target="_blank">@@@follower.Username</a>
+					</li>
+				}
+			</ul>
 
-		@* Mutual Followers *@
-		<ul>
-			@foreach (var follower in connectionsService.Mutual)
-			{
-				<li>
-					<a href="@follower.ProfileUri" target="_blank">@follower.Username</a>
-				</li>
-			}
-		</ul>
-		
-	</details>
+		</details>
+
+		@* Accounts That Follow You Back *@
+		<details>
+
+			@* Title *@
+			<summary>Accounts That Follow You Back</summary>
+
+			@* Mutual Followers *@
+			<ul>
+				@foreach (var follower in connectionsService.Mutual)
+				{
+					<li>
+						<a href="@follower.ProfileUri" target="_blank">@@@follower.Username</a>
+					</li>
+				}
+			</ul>
+			
+		</details>
+	}
 
 </section>
 
 @code {
+
+	private bool IsFileLoaded { get; set; }
+
 	private async Task LoadFileAsync(InputFileChangeEventArgs e)
 	{
 		string extension = Path.GetExtension(e.File.Name);
@@ -77,5 +83,7 @@
 
 		// Read memory stream
 		await connectionsService.LoadConnectionsAsync(stream);
+
+		IsFileLoaded = true;
 	}
 }
