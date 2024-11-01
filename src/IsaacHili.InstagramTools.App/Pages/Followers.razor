@@ -10,13 +10,14 @@
 	<h2>Connections</h2>
 
 	@* File Input *@
-	<InputFile OnChange="LoadFileAsync" accept=".zip"
+	<InputFile OnChange="LoadFileAsync" accept=".zip" autofocus
 		class="p-1.5 bg-slate-50 bg-opacity-25 text-midnight rounded-full w-full max-w-full
-			cursor-pointer
+			cursor-pointer outline-none
 			file:bg-midnight file:text-slate-50 file:font-mono file:mr-2 file:px-4
 			file:rounded-full file:border-none file:cursor-pointer
 			hover:bg-opacity-50
-			file:hover:bg-mustard file:hover:text-midnight" />
+			focus:bg-opacity-50 focus:bg-midnight focus:text-slate-50
+			file:focus:text-mustard" />
 
 	@if (IsFileLoaded)
 	{
@@ -42,8 +43,7 @@
 
 							@* Connection *@
 							<li class="px-2 overflow-hidden text-ellipsis">
-								<a href="@connectionsService.NotFollowed[i].ProfileUri" target="_blank"
-									class="outline-none hover:underline focus:underline focus:decoration-wavy">
+								<a href="@connectionsService.NotFollowed[i].ProfileUri" target="_blank">
 									@@@connectionsService.NotFollowed[i].Username
 								</a>
 							</li>

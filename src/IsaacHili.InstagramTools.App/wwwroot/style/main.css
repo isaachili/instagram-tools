@@ -36,6 +36,13 @@
 
 		@apply my-4;
 	}
+
+	a {
+		@apply outline-none;
+		@apply hover:underline;
+		@apply focus:underline;
+		@apply focus:decoration-wavy;
+	}
 }
 
 body {
