@@ -30,10 +30,13 @@
 			FollowDate="connection => connection.DateFollowing"></AccountConnections>
 
 		@* Accounts That You Don't Follow Back *@
-		<details>
+		<details class="mt-8">
 
 			@* Title *@
-			<summary>Accounts That You Don't Follow Back</summary>
+			<summary class="font-mono font-extrabold mt-8 mb-4 outline-none
+				focus:underline focus:decoration-wavy">
+				Accounts That You Don't Follow Back
+			</summary>
 
 			@* Not Following *@
 			<AccountConnections Connections="connectionsService.NotFollowing"
@@ -42,16 +45,19 @@
 		</details>
 
 		@* Accounts That Follow You Back *@
-		<details>
+		<details class="mt-8">
 
 			@* Title *@
-			<summary>Accounts That Follow You Back</summary>
+			<summary class="font-mono font-extrabold mt-8 mb-4 outline-none
+				focus:underline focus:decoration-wavy">
+				Accounts That Follow You Back
+			</summary>
 
 			@* Mutual Followers *@
-			<ul>
+			<ul class="grid grid-cols-4">
 				@foreach (var follower in connectionsService.Mutual)
 				{
-					<li>
+					<li class="px-2 overflow-hidden text-ellipsis">
 						<a href="@follower.ProfileUri" target="_blank">@@@follower.Username</a>
 					</li>
 				}
