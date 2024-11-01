@@ -19,5 +19,10 @@ export const theme = {
 		'mono': [ 'JetBrains Mono' ],
 		'sans': [ 'Raleway' ]
 	},
+	extend: {
+		gridTemplateColumns: {
+			'1fr-3fr': '1fr 3fr',
+		},
+	}
 };
 export const plugins = [];

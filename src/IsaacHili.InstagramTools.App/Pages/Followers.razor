@@ -2,11 +2,12 @@
 
 @page "/"
 @using IsaacHili.InstagramTools.Followers.Abstractions.Services
+@using System.Diagnostics
 
 @* Followers and Following *@
 <section>
 
-	<h2>My Connections</h2>
+	<h2>Connections</h2>
 
 	@* File Input *@
 	<InputFile OnChange="LoadFileAsync" accept=".zip" />
@@ -17,10 +18,34 @@
 
 		@* Not Followed *@
 		<ul>
-			@foreach (var follower in connectionsService.NotFollowed)
+			@for (int i = 0; i < connectionsService.NotFollowed.Count; i++)
 			{
-				<li>
-					<a href="@follower.ProfileUri" target="_blank">@@@follower.Username</a>
+				@* Year *@
+				<li data-year="@connectionsService.NotFollowed[i].DateFollowing.Year"
+					class="grid grid-cols-1fr-3fr py-4 border-b-2
+						before:font-bold before:content-[attr(data-year)]
+						last-of-type:border-none">
+
+					@* Connections *@
+					<ul class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3">
+
+						@do
+						{
+							@* Increment Indexer *@
+							i++;
+
+							@* Connection *@
+							<li class="px-2 overflow-hidden text-ellipsis">
+								<a href="@connectionsService.NotFollowed[i].ProfileUri" target="_blank">
+									@@@connectionsService.NotFollowed[i].Username
+								</a>
+							</li>
+						} while (i + 1 < connectionsService.NotFollowed.Count
+							&& connectionsService.NotFollowed[i].DateFollowing.Year
+								== connectionsService.NotFollowed[i + 1].DateFollowing.Year);
+
+					</ul>
+
 				</li>
 			}
 		</ul>

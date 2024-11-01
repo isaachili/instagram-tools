@@ -15,11 +15,11 @@ internal class ConnectionsService : IConnectionsService
 
 	#region Properties
 
-	public IEnumerable<Connection> Mutual => _mutual;
+	public IList<Connection> Mutual => _mutual;
 
-	public IEnumerable<Connection> NotFollowed => _notFollowed;
+	public IList<Connection> NotFollowed => _notFollowed;
 
-	public IEnumerable<Connection> NotFollowing => _notFollowing;
+	public IList<Connection> NotFollowing => _notFollowing;
 
 	#endregion
 
