@@ -1,6 +1,8 @@
 @inject IConnectionsService connectionsService
 
 @page "/"
+
+@using IsaacHili.InstagramTools.App.Shared
 @using IsaacHili.InstagramTools.Followers.Abstractions.Services
 @using System.Diagnostics
 
@@ -24,38 +26,8 @@
 		<h3>Accounts That Don't Follow You Back</h3>
 
 		@* Not Followed *@
-		<ul>
-			@for (int i = 0; i < connectionsService.NotFollowed.Count; i++)
-			{
-				@* Year *@
-				<li data-year="@connectionsService.NotFollowed[i].DateFollowing.Year"
-					class="grid grid-cols-1fr-3fr py-4 border-b-2
-						before:font-bold before:content-[attr(data-year)]
-						last-of-type:border-none">
-
-					@* Connections *@
-					<ul class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3">
-
-						@do
-						{
-							@* Increment Indexer *@
-							i++;
-
-							@* Connection *@
-							<li class="px-2 overflow-hidden text-ellipsis">
-								<a href="@connectionsService.NotFollowed[i].ProfileUri" target="_blank">
-									@@@connectionsService.NotFollowed[i].Username
-								</a>
-							</li>
-						} while (i + 1 < connectionsService.NotFollowed.Count
-							&& connectionsService.NotFollowed[i].DateFollowing.Year
-								== connectionsService.NotFollowed[i + 1].DateFollowing.Year);
-
-					</ul>
-
-				</li>
-			}
-		</ul>
+		<AccountConnections Connections="connectionsService.NotFollowed"
+			FollowDate="connection => connection.DateFollowing"></AccountConnections>
 
 		@* Accounts That You Don't Follow Back *@
 		<details>
@@ -64,14 +36,8 @@
 			<summary>Accounts That You Don't Follow Back</summary>
 
 			@* Not Following *@
-			<ul>
-				@foreach (var follower in connectionsService.NotFollowing)
-				{
-					<li>
-						<a href="@follower.ProfileUri" target="_blank">@@@follower.Username</a>
-					</li>
-				}
-			</ul>
+			<AccountConnections Connections="connectionsService.NotFollowing"
+				FollowDate="connection => connection.DateFollowed"></AccountConnections>
 
 		</details>
 
