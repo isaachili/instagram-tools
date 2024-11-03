@@ -41,18 +41,24 @@
 	</header>
 
 	<!-- Main -->
-	<main id="app" class="px-10 py-4 md:px-20 xl:px-[30vw] leading-relaxed flex-grow flex-shrink-0
+	<main id="app" class="flex px-10 py-4 md:px-20 xl:px-[30vw] leading-relaxed flex-grow flex-shrink-0
 		selection:bg-midnight selection:text-slate-50">
 
-		<div>
+		<div id="loading" class="hidden">
 			Loading...
 		</div>
 
 		<!-- No Script -->
-		<noscript class="font-mono text-3xl">
+		<noscript class="self-center font-mono text-3xl">
 			⚙️ Oops! It looks like you’ve stumbled into the JavaScript-free zone! 🔒
 			To see all the cool stuff on this site, please turn on JavaScript and refresh.
 		</noscript>
+
+		<!-- No WASM -->
+		<div id="no-wasm" class="self-center hidden font-mono text-3xl">
+			🕹️ Oops! Looks like the WASM wizard is taking a nap. 🧙‍♂️
+			This site needs WebAssembly to bring everything to life! Please enable it to awaken the magic, and we'll be good to go! 🪄
+		</div>
 
 	</main>
 
@@ -62,6 +68,32 @@
 	</footer>
 
 	<script src="_framework/blazor.webassembly.js"></script>
+
+	<script>
+
+		document.getElementById("loading").style.display = "block";
+
+		const wasmSupported = () => {
+			
+			try {
+				if (typeof WebAssembly === "object"
+					&& typeof WebAssembly.instantiate === "function") {
+					const module = new WebAssembly.Module(Uint8Array.of(0x0, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00));
+					if (module instanceof WebAssembly.Module)
+						return new WebAssembly.Instance(module) instanceof WebAssembly.Instance;
+				}
+			} catch (e) {
+			}
+			return false;
+		}
+
+		if (!wasmSupported()) {
+
+			document.getElementById("no-wasm").style.display = "block";
+			document.getElementById("loading").style.display = "none";
+		}
+
+	</script>
 
 </body>
 
