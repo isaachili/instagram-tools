@@ -1,0 +1,51 @@
+/* Stylesheets */
+@import "./abstracts/fonts.css";
+@import "./layout/scrollbars.css";
+
+/* Tailwind CSS */
+@tailwind base;
+@tailwind utilities;
+
+@layer base {
+
+	h1, h2, h3, h4, h5, h6 {
+
+		@apply font-mono;
+		@apply font-extrabold;
+	}
+
+	h1 {
+
+		@apply text-5xl;
+	}
+
+	h2 {
+
+		@apply text-3xl;
+		@apply mt-12;
+		@apply mb-6;
+	}
+
+	h3 {
+
+		@apply mt-8;
+		@apply mb-4;
+	}
+
+	p {
+
+		@apply my-4;
+	}
+
+	a {
+		@apply outline-none;
+		@apply hover:underline;
+		@apply focus:underline;
+		@apply focus:decoration-wavy;
+	}
+}
+
+body {
+
+	font-size: 20px;
+}

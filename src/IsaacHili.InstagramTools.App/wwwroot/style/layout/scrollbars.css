@@ -1,0 +1,28 @@
+/* Scrollbars */
+* {
+
+	--color-scrollbar-track: transparent;
+	--color-scrollbar-thumb: theme('colors.sky.50');
+
+	/* Firefox */
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-scrollbar-thumb) var(--color-scrollbar-track);
+
+	/* Chrome, Safari and Edge */
+	&::-webkit-scrollbar {
+
+		width: 0.5rem;
+	}
+
+	&::-webkit-scrollbar-track {
+		
+		background: var(--color-scrollbar-track);
+	}
+
+	&::-webkit-scrollbar-thumb {
+
+		background-color: var(--color-scrollbar-thumb);
+		border: transparent;
+		border-radius: 100vh;
+	}
+}

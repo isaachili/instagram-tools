@@ -1,67 +1,86 @@
 @inject IConnectionsService connectionsService
 
 @page "/"
+
+@using IsaacHili.InstagramTools.App.Shared
 @using IsaacHili.InstagramTools.Followers.Abstractions.Services
 
 @* Followers and Following *@
 <section>
 
-	<h2>Followers and Following</h2>
+	<h2>Connections</h2>
+
+	<p class="text-lg">
+		Privacy is totally the name of the game!
+		When you upload your Meta information, all the work to figure out who’s following who (and who you're following back) happens right in your browser
+		— <span class="font-bold">nothing leaves your computer</span>.
+		It’s like your own private detective, but one that never spills secrets.
+		Plus, if you’re curious or just wanna double-check, all the code is open and available on
+		<a href="https://github.com/isaachili/instagram-tools/" target="_blank">GitHub</a>.
+		So, you can peek under the hood anytime to see exactly how it all works, no mystery required!
+	</p>
 
 	@* File Input *@
-	<InputFile OnChange="LoadFileAsync" accept=".zip" />
+	<InputFile OnChange="LoadFileAsync" accept=".zip" autofocus
+		class="p-1.5 bg-slate-50 bg-opacity-25 text-midnight rounded-full w-full max-w-full
+			cursor-pointer outline-none
+			file:bg-midnight file:text-slate-50 file:font-mono file:mr-2 file:px-4
+			file:rounded-full file:border-none file:cursor-pointer
+			hover:bg-opacity-50
+			focus:bg-opacity-50 focus:bg-midnight focus:text-slate-50
+			file:focus:text-mustard" />
 
-	<h3>Accounts That Don't Follow You Back</h3>
+	@if (IsFileLoaded)
+	{
+		<h3>Accounts That Don't Follow You Back</h3>
 
-	@* Not Followed *@
-	<ul>
-		@foreach (var follower in connectionsService.NotFollowed)
-		{
-			<li>
-				<a href="@follower.ProfileUri" target="_blank">@follower.Username</a>
-			</li>
-		}
-	</ul>
+		@* Not Followed *@
+		<AccountConnections Connections="connectionsService.NotFollowed"
+			FollowDate="connection => connection.DateFollowing"></AccountConnections>
 
-	@* Accounts That You Don't Follow Back *@
-	<details>
+		@* Accounts That You Don't Follow Back *@
+		<details class="mt-8">
 
-		@* Title *@
-		<summary>Accounts That You Don't Follow Back</summary>
+			@* Title *@
+			<summary class="font-mono font-extrabold mt-8 mb-4 outline-none
+				focus:underline focus:decoration-wavy">
+				Accounts That You Don't Follow Back
+			</summary>
 
-		@* Not Following *@
-		<ul>
-			@foreach (var follower in connectionsService.NotFollowing)
-			{
-				<li>
-					<a href="@follower.ProfileUri" target="_blank">@follower.Username</a>
-				</li>
-			}
-		</ul>
+			@* Not Following *@
+			<AccountConnections Connections="connectionsService.NotFollowing"
+				FollowDate="connection => connection.DateFollowed"></AccountConnections>
 
-	</details>
+		</details>
 
-	@* Accounts That Follow You Back *@
-	<details>
+		@* Accounts That Follow You Back *@
+		<details class="mt-8">
 
-		@* Title *@
-		<summary>Accounts That Follow You Back</summary>
+			@* Title *@
+			<summary class="font-mono font-extrabold mt-8 mb-4 outline-none
+				focus:underline focus:decoration-wavy">
+				Accounts That Follow You Back
+			</summary>
 
-		@* Mutual Followers *@
-		<ul>
-			@foreach (var follower in connectionsService.Mutual)
-			{
-				<li>
-					<a href="@follower.ProfileUri" target="_blank">@follower.Username</a>
-				</li>
-			}
-		</ul>
-		
-	</details>
+			@* Mutual Followers *@
+			<ul class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3">
+				@foreach (var follower in connectionsService.Mutual)
+				{
+					<li class="px-2 overflow-hidden text-ellipsis">
+						<a href="@follower.ProfileUri" target="_blank">@@@follower.Username</a>
+					</li>
+				}
+			</ul>
+			
+		</details>
+	}
 
 </section>
 
 @code {
+
+	private bool IsFileLoaded { get; set; }
+
 	private async Task LoadFileAsync(InputFileChangeEventArgs e)
 	{
 		string extension = Path.GetExtension(e.File.Name);
@@ -77,5 +96,7 @@
 
 		// Read memory stream
 		await connectionsService.LoadConnectionsAsync(stream);
+
+		IsFileLoaded = true;
 	}
 }
