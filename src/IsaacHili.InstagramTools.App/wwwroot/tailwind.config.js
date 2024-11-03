@@ -23,6 +23,15 @@ export const theme = {
 		gridTemplateColumns: {
 			'1fr-3fr': '1fr 3fr',
 		},
+		keyframes: {
+			'progressBar': {
+				'0%': { width: '0' },
+				'100%': { width: '100%' },
+			}
+		},
+		animation: {
+			'progress-bar': 'progressBar 1s ease-in'
+		}
 	}
 };
 export const plugins = [];

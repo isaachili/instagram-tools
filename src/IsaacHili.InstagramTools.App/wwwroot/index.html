@@ -44,8 +44,13 @@
 	<main id="app" class="flex px-10 py-4 md:px-20 xl:px-[30vw] leading-relaxed flex-grow flex-shrink-0
 		selection:bg-midnight selection:text-slate-50">
 
-		<div id="loading" class="hidden">
-			Loading...
+		<!-- Loading -->
+		<div id="loading" class="w-full hidden">
+			<div class="w-full border border-midnight rounded-full p-1">
+				<div class="h-4 w-[95%]">
+					<div class="h-full bg-midnight rounded-full animate-progress-bar"></div>
+				</div>
+			</div>
 		</div>
 
 		<!-- No Script -->
