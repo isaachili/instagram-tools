@@ -1,0 +1,90 @@
+name: Publish Package
+description: Builds, packs and publishes the project to the build artefacts.
+
+# Inputs
+inputs:
+
+  # Version
+  version:
+    description: Fully-Qualified Version
+    required: false
+
+  # Version Suffix
+  version-suffix:
+    description: Version Suffix
+    required: false
+
+# Action
+runs:
+  using: "composite"
+  steps:
+
+  # Determine version
+  - name: Determine version
+    id: version
+    shell: bash
+    run: |
+      VERSION=${{ inputs.version }}
+
+      if [[ $VERSION == '' ]]; then
+
+        VERSION_SUFFIX=${{ inputs.version-suffix }}
+
+        if [[ VERSION_SUFFIX != '' ]]; then
+
+          VERSION_SUFFIX="-$VERSION_SUFFIX"
+
+        fi
+
+        VERSION="$(git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}')$VERSION_SUFFIX"
+
+      fi
+
+      echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+  # Node.js setup
+  - name: Set up Node.js
+    uses: actions/setup-node@v4
+
+  # Install NPM dependencies
+  - name: Install NPM dependencies
+    shell: bash
+    working-directory: ./src/IsaacHili.InstagramTools.App/wwwroot/
+    run: npm ci
+
+  # Build CSS
+  - name: Build CSS
+    working-directory: ./src/IsaacHili.InstagramTools.App/wwwroot/
+    shell: bash
+    run: npx postcss ./style/main.css -o ../../../dist/main.min.css
+
+  # .NET setup
+  - name: Set up .NET
+    uses: actions/setup-dotnet@v4
+    with:
+      dotnet-version: | 
+        8.0.x
+
+  # Install NuGet dependencies
+  - name: Install NuGet dependencies
+    shell: bash
+    run: dotnet restore
+
+  # Publish .NET app
+  - name: Build and publish .NET Blazor WASM app
+    working-directory: ./src/IsaacHili.InstagramTools.App/
+    shell: bash
+    run: dotnet publish --configuration Release --output ../../build
+
+  # Update base URL in index.html
+  - name: Update base URL in index.html
+    working-directory: ./build/wwwroot
+    shell: bash
+    run: sed -i 's|<base href="/" />|<base href="/instagram-tools/" />|' ./index.html
+
+  # Upload artifacts
+  - name: Upload artifacts
+    uses: actions/upload-artifact@v4
+    with:
+      name: isaachili-instagram-tools_${{ steps.version.outputs.version }}
+      path: ./build/wwwroot
