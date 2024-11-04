@@ -56,7 +56,7 @@ runs:
   - name: Build CSS
     working-directory: ./src/IsaacHili.InstagramTools.App/wwwroot/
     shell: bash
-    run: npx postcss ./style/main.css -o ../../../dist/main.min.css
+    run: npx postcss ./style/main.css -o ./dist/main.min.css
 
   # .NET setup
   - name: Set up .NET
