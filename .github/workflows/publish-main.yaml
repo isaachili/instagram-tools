@@ -1,0 +1,27 @@
+name: Publish Package (Main)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+
+    # Checkout
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    # Build and publish
+    - name: Build and publish
+      uses: ./.github/actions/publish
+      with:
+        version-suffix: "rc$(date +'%y%m%d%H%M%S')"
