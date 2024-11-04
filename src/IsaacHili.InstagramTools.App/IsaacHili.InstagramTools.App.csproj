@@ -17,4 +17,12 @@
 		<ProjectReference Include="..\IsaacHili.InstagramTools.Followers\IsaacHili.InstagramTools.Followers.csproj" />
 	</ItemGroup>
 
+	<!-- Publishing -->
+	<ItemGroup>
+		<Content Update="wwwroot\**\*" CopyToPublishDirectory="Never" />
+		<Content Update="wwwroot\index.html" CopyToPublishDirectory="Always" />
+		<Content Update="wwwroot\assets\**\*" CopyToPublishDirectory="Always" />
+		<Content Update="wwwroot\dist\**\*" CopyToPublishDirectory="Always" />
+	</ItemGroup>
+
 </Project>
