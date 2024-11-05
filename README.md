@@ -74,3 +74,10 @@ dotnet watch
 
 * Ensure that both .NET 8 and Node.js are installed.
 * Run `dotnet --version` and `npm --version` to confirm installations if you encounter issues with dependencies.
+
+---
+## Builds
+
+## Builds
+[![Main](https://github.com/isaachili/instagram-tools/actions/workflows/publish-main.yaml/badge.svg)](https://github.com/isaachili/instagram-tools/actions/workflows/publish-main.yaml)  
+[![Release](https://github.com/isaachili/instagram-tools/actions/workflows/publish-releases.yaml/badge.svg)](https://github.com/isaachili/instagram-tools/actions/workflows/publish-releases.yaml)
