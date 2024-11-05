@@ -91,9 +91,7 @@ runs:
   - name: Update Umami Analytics App ID
     working-directory: ./build/wwwroot
     shell: bash
-    env:
-      UMAMI_APP_ID: ${{ inputs.umami-app-id }}
-    run: sed -i 's|<script src="https://analytics.umami.is/script.js" data-website-id=""></script>|<script src="https://analytics.umami.is/script.js" data-website-id="$UMAMI_APP_ID"></script>|' ./index.html
+    run: sed -i 's|<script src="https://analytics.umami.is/script.js" data-website-id=""></script>|<script src="https://analytics.umami.is/script.js" data-website-id="${{ inputs.umami-app-id }}"></script>|' ./index.html
 
   # Upload artifacts
   - name: Upload artifacts
