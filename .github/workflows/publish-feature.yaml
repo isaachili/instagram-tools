@@ -25,4 +25,3 @@ jobs:
       uses: ./.github/actions/publish
       with:
         version-suffix: "alpha$(date +'%y%m%d%H%M%S')"
-        umami-app-id: ${{ secrets.UMAMI_APP_ID }}
