@@ -25,3 +25,4 @@ jobs:
       uses: ./.github/actions/publish
       with:
         version: $GITHUB_REF_NAME
+        umami-app-id: ${{ secrets.UMAMI_APP_ID }}
