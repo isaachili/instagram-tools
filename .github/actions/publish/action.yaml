@@ -14,9 +14,9 @@ inputs:
     description: Version Suffix
     required: false
 
-  # Add Umami Analytics
-  add-umami-analytics:
-    description: Add Umami Analytics
+  # Umami App ID
+  umami-app-id:
+    description: Umami App ID
     required: false
 
 # Action
@@ -89,11 +89,10 @@ runs:
 
   # Update Umami Analytics App ID
   - name: Update Umami Analytics App ID
-    if: ${{ inputs.version == true }}
     working-directory: ./build/wwwroot
     shell: bash
     env:
-      UMAMI_APP_ID: ${{ secrets.UMAMI_APP_ID }}
+      UMAMI_APP_ID: ${{ inputs.umami-app-id }}
     run: sed -i 's|<script src="https://analytics.umami.is/script.js" data-website-id=""></script>|<script src="https://analytics.umami.is/script.js" data-website-id="$UMAMI_APP_ID"></script>|' ./index.html
 
   # Upload artifacts
