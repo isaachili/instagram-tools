@@ -25,3 +25,4 @@ jobs:
       uses: ./.github/actions/publish
       with:
         version-suffix: "alpha$(date +'%y%m%d%H%M%S')"
+        add-umami-analytics: true
