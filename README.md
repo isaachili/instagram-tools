@@ -14,7 +14,7 @@ Whether you’re catching up with friends, cleaning up your profile, or just cur
 
 ## Prerequisites
 
-* **.NET 8 SDK:**
+* **.NET 8 SDK**
 * **Node.js and NPM**
 
 ## Installing Dependencies
