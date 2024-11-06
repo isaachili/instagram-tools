@@ -42,6 +42,7 @@
 		@apply hover:underline;
 		@apply focus:underline;
 		@apply focus:decoration-wavy;
+		@apply text-sky-800;
 	}
 }
 
