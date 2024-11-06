@@ -10,7 +10,7 @@
 
 	<h2>Connections</h2>
 
-	<p class="text-lg">
+	<p class="text-lg md:text-justify">
 		Privacy is totally the name of the game!
 		When you upload your Meta information, all the work to figure out who’s following who (and who you're following back) happens right in your browser
 		— <span class="font-bold">nothing leaves your computer</span>.
@@ -24,9 +24,11 @@
 		</span>
 	</p>
 
+	<label class="block mt-8 mb-2 font-mono font-bold text-lg" for="file-upload">Upload your Instagram information:</label>
+
 	@* File Input *@
-	<InputFile OnChange="LoadFileAsync" accept=".zip" autofocus
-		class="p-1.5 bg-slate-50 bg-opacity-25 text-midnight rounded-full w-full max-w-full
+	<InputFile id="file-upload" OnChange="LoadFileAsync" accept=".zip" autofocus
+		class="mb-8 p-1.5 bg-slate-50 bg-opacity-25 text-midnight rounded-full w-full max-w-full
 			cursor-pointer outline-none
 			file:bg-midnight file:text-slate-50 file:font-mono file:mr-2 file:px-4
 			file:rounded-full file:border-none file:cursor-pointer
@@ -77,6 +79,63 @@
 			</ul>
 			
 		</details>
+	}
+	else
+	{
+		<section class="text-lg md:text-justify mb-16">
+			<h3>How do I download my Instagram infromation?</h3>
+
+			<ol class="list-decimal" role="list">
+				<li>
+					Go to the
+					<a class="font-bold" href="https://accountscenter.instagram.com/info_and_permissions/" target="_blank">Your information and permissions</a>
+					page in the Meta Accounts Center.
+				</li>
+				<li>Click on <span class="font-bold">Download your information</span>.</li>
+				<li>A dialog should show up prompting you to <span class="font-bold">Download or transfer information</span>.</li>
+				<li>This should be followed by a <span class="font-bold">Where do you want to get information from?</span> dialog.</li>
+				<li>Choose your Instagram account and click on <span class="font-bold">Next</span>.</li>
+				<li>When prompted <span class="font-bold">How much information do you want?</span> select <span class="font-bold">Some of your information</span>.</li>
+				<li>You will then be asked to <span class="font-bold">Select information</span>.</li>
+				<li>Locate the <span class="font-bold">Connections</span> section and select <span class="font-bold">Followers and following</span>.</li>
+				<li>Hit <span class="font-bold">Next</span>.</li>
+				<li>Next, choose <span class="Download to device"></span>.</li>
+				<li>You will then be prompted to <span class="font-bold">Create files to download</span>.</li>
+				<li>Click on <span class="font-bold">Date range</span>, choose <span class="font-bold">All time</span> and hit <span class="font-bold">Save</span>.</li>
+				<li>Then click on <span class="font-bold">Format</span>, select <span class="font-bold">JSON</span> and then <span class="font-bold">Save</span>.</li>
+				<li class="italic">(Optional) For <span class="font-bold">Media quality</span> choose <span class="font-bold">Low</span>.</li>
+				<li>Finally, click on <span class="font-bold">Create files</span>.</li>
+				<li>You should receive an email from Instagram stating that <span class="font-bold">Your Meta information download is ready</span>.</li>
+				<li>Follow the download link, and download your ZIP file.</li>
+			</ol>
+
+			<h3>What am I downloading?</h3>
+
+			<p>
+				Your Instagram information may contain sensitive information.
+				Therefore, it is imperative that you do not share the downloaded information with anyone you don't trust.
+				To eliminate risks, it is recommended that you download only the necessary data.
+
+				<br/>
+
+				This tool only makes use of the <span class="font-bold">Followers and following</span> data, anything else is simply not processed.
+				Limiting the downloaded information to only <span class="font-bold">Followers and following</span> will not only reduce the file size,
+				but it will also reduce the risk of sensitive data getting leaked.
+			</p>
+
+			<h3>How is my information used?</h3>
+
+			<p>
+				Your Meta information is processed on your device to determine your mutual followers, and one-way connections.
+				No information is ever uploaded to any server or third-party, and any processed data is lost as soon as you close your browser tab.
+			</p>
+
+			<h3>Does this work with private accounts?</h3>
+
+			<p>
+				Yes! When you download your Instagram information you are downloading all of the relevant information that Instagram has on you.
+			</p>
+		</section>
 	}
 
 </section>
