@@ -50,7 +50,6 @@ internal class ConnectionsService : IConnectionsService
 		}
 
 		var following = entries.Value.Following["relationships_following"]?.AsArray();
-		var followers = entries.Value.Followers.AsArray();
 
 		if (following is null)
 		{
@@ -61,7 +60,11 @@ internal class ConnectionsService : IConnectionsService
 
 		// Deserialize entries
 		DeserializeJsonArray(connections, following, ConnectionTypes.Following);
-		DeserializeJsonArray(connections, followers, ConnectionTypes.Follower);
+
+		foreach (var followers in entries.Value.Followers)
+		{
+			DeserializeJsonArray(connections, followers.AsArray(), ConnectionTypes.Follower);
+		}
 
 		// Sort connections
 		Sort(connections);
@@ -201,17 +204,25 @@ internal class ConnectionsService : IConnectionsService
 	/// <returns>
 	/// The retrieved followers and following JSON root nodes.
 	/// </returns>
-	private static async Task<(JsonNode Followers, JsonNode Following)?> LoadArchiveEntriesAsync(ZipArchive archive)
+	private static async Task<(JsonNode Following, JsonNode[] Followers)?> LoadArchiveEntriesAsync(ZipArchive archive)
 	{
-		// Start both tasks simultaneously
-		Task<JsonNode?>[] tasks =
-		[
-			// Load followers
-			LoadArchiveEntryAsync(archive, "connections/followers_and_following/followers_1.json"),
+		var entry = archive.GetEntry("connections/followers_and_following/following.json");
 
+		// Start tasks simultaneously
+		var tasks = new List<Task<JsonNode?>>
+		{
 			// Load following
-			LoadArchiveEntryAsync(archive, "connections/followers_and_following/following.json"),
-		];
+			LoadArchiveEntryAsync(entry),
+		};
+
+		int counter = 1;
+
+		// Load followers
+		while ((entry = archive.GetEntry(
+			$"connections/followers_and_following/followers_{counter++}.json")) is not null)
+		{
+			tasks.Add(LoadArchiveEntryAsync(entry));
+		}
 
 		// Wait for first task to finish
 		var task = await Task.WhenAny(tasks);
@@ -225,30 +236,30 @@ internal class ConnectionsService : IConnectionsService
 		// Wait for both tasks to finish
 		await Task.WhenAll(tasks);
 
-		var followers = tasks[0].Result;
-		var following = tasks[1].Result;
+		var following = tasks[0].Result;
+		var followers = tasks[1..]
+			.Where(t => t.Result is not null)
+			.Select(t => t.Result!)
+			.ToArray();
 
 		// Ensure that both entries were found
-		if (followers is null || following is null)
+		if (following is null || followers.Length == 0)
 		{
 			return null;
 		}
 
-		return (followers, following);
+		return (following, followers);
 	}
 
 	/// <summary>
-	/// Reads and parses and entry from the archive.
+	/// Reads and parses an entry from the archive.
 	/// </summary>
-	/// <param name="archive">ZIP archive</param>
-	/// <param name="entryName">Entry name</param>
+	/// <param name="entry">ZIP archive entry</param>
 	/// <returns>
 	/// The retrieved entry's JSON.
 	/// </returns>
-	private static async Task<JsonNode?> LoadArchiveEntryAsync(ZipArchive archive, string entryName)
+	private static async Task<JsonNode?> LoadArchiveEntryAsync(ZipArchiveEntry? entry)
 	{
-		var entry = archive.GetEntry(entryName);
-
 		if (entry is null)
 		{
 			return null;
