@@ -143,8 +143,14 @@ internal class ConnectionsService : IConnectionsService
 
 			var data = listData[0];
 
-			// Read username
-			string? username = data?["value"]?.GetValue<string>();
+			// Read username (following.json)
+			string? username = @object["title"]?.GetValue<string>();
+
+			// Read username (followers.json)
+			if (string.IsNullOrEmpty(username))
+			{
+				username = data?["value"]?.GetValue<string>();
+			}
 			
 			// Read href
 			string? href = data?["href"]?.GetValue<string>();
