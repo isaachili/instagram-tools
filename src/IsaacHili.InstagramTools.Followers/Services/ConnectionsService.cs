@@ -9,17 +9,17 @@ namespace IsaacHili.InstagramTools.Followers.Services;
 internal class ConnectionsService : IConnectionsService
 {
 	// Connections
-	private Connection[] _mutual = [];
-	private Connection[] _notFollowed = [];
-	private Connection[] _notFollowing = [];
+	private Connection[]? _mutual;
+	private Connection[]? _notFollowed;
+	private Connection[]? _notFollowing;
 
 	#region Properties
 
-	public IList<Connection> Mutual => _mutual;
+	public IList<Connection> Mutual => _mutual ?? [];
 
-	public IList<Connection> NotFollowed => _notFollowed;
+	public IList<Connection> NotFollowed => _notFollowed ?? [];
 
-	public IList<Connection> NotFollowing => _notFollowing;
+	public IList<Connection> NotFollowing => _notFollowing ?? [];
 
 	#endregion
 
@@ -28,9 +28,9 @@ internal class ConnectionsService : IConnectionsService
 	/// </summary>
 	private void ResetConnections()
 	{
-		_mutual = [];
-		_notFollowed = [];
-		_notFollowing = [];
+		_notFollowed = null;
+		_notFollowing = null;
+		_mutual = null;
 	}
 
 	public async Task LoadConnectionsAsync(Stream stream)
@@ -182,20 +182,19 @@ internal class ConnectionsService : IConnectionsService
 		// Group and sort connections
 		var buckets = connections.Values.GroupBy(g => g.ConnectionType)
 			.Where(g => g.Key != ConnectionTypes.None)
-			.OrderBy(g => g.Key)
-			.Select(g => g
-				.OrderBy(c => (IComparable)(c.ConnectionType switch
-					{
-						ConnectionTypes.Following => c.DateFollowing,
-						ConnectionTypes.Follower => c.DateFollowed,
-						_ => c.Username,
-					}))
-				.ToArray())
-			.ToArray();
+			.ToDictionary(
+				g => g.Key,
+				g => g.OrderBy(c => (IComparable)(c.ConnectionType switch
+				{
+					ConnectionTypes.Following => c.DateFollowing,
+					ConnectionTypes.Follower => c.DateFollowed,
+					_ => c.Username,
+				}))
+				.ToArray());
 
-		_notFollowed = buckets[(int)ConnectionTypes.Following - 1];
-		_notFollowing = buckets[(int)ConnectionTypes.Follower - 1];
-		_mutual = buckets[(int)ConnectionTypes.Mutual - 1];
+		_ = buckets.TryGetValue(ConnectionTypes.Following, out _notFollowed);
+		_ = buckets.TryGetValue(ConnectionTypes.Follower, out _notFollowing);
+		_ = buckets.TryGetValue(ConnectionTypes.Mutual, out _mutual);
 	}
 
 	#region  Load Archive
