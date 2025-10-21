@@ -1,6 +1,6 @@
-using IsaacHili.InstagramTools.Followers.Abstractions.Enums;
+using IsaacHili.InstagramTools.Models.Enums;
 
-namespace IsaacHili.InstagramTools.Followers.Abstractions;
+namespace IsaacHili.InstagramTools.Models;
 
 /// <summary>
 /// An entity representing an account's connection.

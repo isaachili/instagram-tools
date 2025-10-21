@@ -1,8 +1,8 @@
-using IsaacHili.InstagramTools.Followers.Abstractions.Services;
-using IsaacHili.InstagramTools.Followers.Services;
+using IsaacHili.InstagramTools.Services;
+using IsaacHili.InstagramTools.Services.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IsaacHili.InstagramTools.Followers.Extensions;
+namespace IsaacHili.InstagramTools.Extensions;
 
 public static class FollowersExtensions
 {

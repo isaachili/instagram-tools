@@ -1,10 +1,10 @@
 using System.IO.Compression;
 using System.Text.Json.Nodes;
-using IsaacHili.InstagramTools.Followers.Abstractions;
-using IsaacHili.InstagramTools.Followers.Abstractions.Enums;
-using IsaacHili.InstagramTools.Followers.Abstractions.Services;
+using IsaacHili.InstagramTools.Models;
+using IsaacHili.InstagramTools.Models.Enums;
+using IsaacHili.InstagramTools.Services.Abstractions;
 
-namespace IsaacHili.InstagramTools.Followers.Services;
+namespace IsaacHili.InstagramTools.Services;
 
 internal class ConnectionsService : IConnectionsService
 {

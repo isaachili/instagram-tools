@@ -1,4 +1,4 @@
-namespace IsaacHili.InstagramTools.Followers.Abstractions.Enums;
+namespace IsaacHili.InstagramTools.Models.Enums;
 
 /// <summary>
 /// Connection type

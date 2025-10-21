@@ -54,12 +54,12 @@ runs:
   # Install NPM dependencies
   - name: Install NPM dependencies
     shell: bash
-    working-directory: ./src/IsaacHili.InstagramTools.App/wwwroot/
+    working-directory: ./src/IsaacHili.InstagramTools/wwwroot/
     run: npm ci
 
   # Build CSS
   - name: Build CSS
-    working-directory: ./src/IsaacHili.InstagramTools.App/wwwroot/
+    working-directory: ./src/IsaacHili.InstagramTools/wwwroot/
     shell: bash
     run: npx postcss ./style/main.css -o ./dist/main.min.css
 
@@ -82,7 +82,7 @@ runs:
 
   # Publish .NET app
   - name: Build and publish .NET Blazor WASM app
-    working-directory: ./src/IsaacHili.InstagramTools.App/
+    working-directory: ./src/IsaacHili.InstagramTools/
     shell: bash
     run: dotnet publish --configuration Release --output ../../build
 

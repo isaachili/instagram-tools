@@ -1,4 +1,6 @@
-namespace IsaacHili.InstagramTools.Followers.Abstractions.Services;
+using IsaacHili.InstagramTools.Models;
+
+namespace IsaacHili.InstagramTools.Services.Abstractions;
 
 /// <summary>
 /// A service responsible for processing accounts followed and account followers.

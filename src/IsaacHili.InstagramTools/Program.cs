@@ -1,5 +1,5 @@
-using IsaacHili.InstagramTools.App;
-using IsaacHili.InstagramTools.Followers.Extensions;
+using IsaacHili.InstagramTools;
+using IsaacHili.InstagramTools.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 

@@ -22,14 +22,14 @@ Whether you’re catching up with friends, cleaning up your profile, or just cur
 ### .NET
 
 ~~~
-cd ./src/IsaacHili.InstagramTools.App
+cd ./src/IsaacHili.InstagramTools
 dotnet restore
 ~~~
 
 ### NPM
 
 ~~~
-cd ./src/IsaacHili.InstagramTools.App/wwwroot
+cd ./src/IsaacHili.InstagramTools/wwwroot
 npm install
 ~~~
 
@@ -38,7 +38,7 @@ npm install
 ### .NET
 
 ~~~
-cd ./src/IsaacHili.InstagramTools.App
+cd ./src/IsaacHili.InstagramTools
 dotnet build
 ~~~
 
@@ -46,13 +46,13 @@ dotnet build
 
 Generates your CSS files with Tailwind CSS and PostCSS:
 ~~~
-cd ./src/IsaacHili.InstagramTools.App/wwwroot
+cd ./src/IsaacHili.InstagramTools/wwwroot
 npm run build-css
 ~~~
 
 Watches for changes in your HTML and CSS files and rebuilds them on-the-fly:
 ~~~
-cd ./src/IsaacHili.InstagramTools.App/wwwroot
+cd ./src/IsaacHili.InstagramTools/wwwroot
 npm run watch-css
 ~~~
 
@@ -60,13 +60,13 @@ npm run watch-css
 
 Runs ASP.NET Core Blazor WASM project on http://localhost:5263:
 ~~~
-cd ./src/IsaacHili.InstagramTools.App
+cd ./src/IsaacHili.InstagramTools
 dotnet run
 ~~~
 
 Watches and hot reloads changes made within the .NET libraries:
 ~~~
-cd ./src/IsaacHili.InstagramTools.App
+cd ./src/IsaacHili.InstagramTools
 dotnet watch
 ~~~
 
