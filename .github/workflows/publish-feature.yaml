@@ -25,3 +25,12 @@ jobs:
       uses: ./.github/actions/publish
       with:
         version-suffix: "alpha$(date +'%y%m%d%H%M%S')"
+
+    # Publish artefacts to Cloudflare (Preview)
+    - name: Publish artefacts to Cloudflare
+      uses: cloudflare/wrangler-action@v3
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+        command: pages deploy ./build/wwwroot --project-name=instagram-tools
