@@ -26,3 +26,12 @@ jobs:
       with:
         version: $GITHUB_REF_NAME
         umami-app-id: ${{ secrets.UMAMI_APP_ID }}
+
+    # Publish artefacts to Cloudflare (Production)
+    - name: Publish artefacts to Cloudflare
+      uses: cloudflare/wrangler-action@v3
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+        command: pages deploy ./dist --project-name=instagram-tools --branch main

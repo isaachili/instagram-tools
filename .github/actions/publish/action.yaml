@@ -86,12 +86,6 @@ runs:
     shell: bash
     run: dotnet publish --configuration Release --output ../../build
 
-  # Update base URL in index.html
-  - name: Update base URL in index.html
-    working-directory: ./build/wwwroot
-    shell: bash
-    run: sed -i 's|<base href="/" />|<base href="/instagram-tools/" />|' ./index.html
-
   # Update Umami Analytics App ID
   - name: Update Umami Analytics App ID
     working-directory: ./build/wwwroot
